@@ -6,14 +6,18 @@ public class Class {
 	String creditAmount;
 	String capacity;
 	String actual;
+	String instructor;
+	String year;
 	
 	public Class(String title, String status, String creditAmount,
-			String capacity, String actual) {
+			String capacity, String actual, String instructor, String year) {
 		this.title = title;
 		this.status = status;
 		this.creditAmount = creditAmount;
 		this.capacity = capacity;
 		this.actual = actual;
+		this.instructor = instructor;
+		this.year = year;
 	}
 	
 	public String toString() {
@@ -22,7 +26,8 @@ public class Class {
 		str += "Credits: " + creditAmount + "\n";
 		str += "Capacity: " + capacity + "\n";
 		str += "Actual: " + actual + "\n";
-		
+		str += "Instructor: " + instructor + "\n";
+		str += "Year: " + year + "\n";
 		return str;
 	}
 }
