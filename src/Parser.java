@@ -2,27 +2,81 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class Parser {
+	static HashMap<String, String> csvFiles = new HashMap<String, String>();
 	
 	// Parse each csv file and create professor classes, outputting the result to a text file
-	public static void main(String[] args) {
-		HashMap<String, String> csvFiles = new HashMap<String, String>();
+	public static void main(String[] args) throws FileNotFoundException {
+		
 		csvFiles.put("sp19", "19SP");
 		csvFiles.put("fa18", "18FA");
-		
-		for (String file : csvFiles.keySet()) {
-			Parser p = new Parser(file, csvFiles.get(file));
-		}
+		csvFiles.put("sp18", "18SP");
+		csvFiles.put("fa17", "17FA");
+		csvFiles.put("sp17", "17SP");
+		csvFiles.put("fa16", "16FA");
+		csvFiles.put("sp16", "16SP");
+		csvFiles.put("fa15", "15FA");
+		csvFiles.put("sp15", "15SP");
+		csvFiles.put("fa14", "14FA");
+		csvFiles.put("sp14", "14SP");
+		csvFiles.put("fa13", "13FA");
+		csvFiles.put("sp13", "13SP");
+		csvFiles.put("fa12", "12FA");
+		csvFiles.put("sp12", "12SP");
+		csvFiles.put("fa11", "11FA");
+		csvFiles.put("sp11", "11SP");
+		csvFiles.put("fa10", "10FA");
+		csvFiles.put("sp10", "10SP");
+		Parser p = new Parser();
 	}
     
-	public Parser(String file, String year) {
-		parse(file, year);
+	public Parser() throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(new File("main.csv"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Year");
+        sb.append(',');
+        sb.append("Title");
+        sb.append(',');
+        sb.append("Instructor");
+        sb.append(',');
+        sb.append("Credits");
+        sb.append(',');
+        sb.append("Actual");
+        sb.append(',');
+        sb.append("Capacity");
+        sb.append('\n');
+        pw.write(sb.toString());
+        
+		for (String f : csvFiles.keySet()) {
+			ArrayList<Class> c = parse(f, csvFiles.get(f));
+			sb = new StringBuilder();
+			for (Class cl : c) {
+				sb.append(cl.getYear());
+				sb.append(',');			
+				sb.append(cl.getTitle());
+				sb.append(',');
+				sb.append(cl.getInstructor());
+				sb.append(',');
+				sb.append(cl.getCredits());
+				sb.append(',');
+				sb.append(cl.getActual());
+				sb.append(',');
+				sb.append(cl.getCapacity());
+				sb.append('\n');
+			}
+			pw.write(sb.toString());
+		}
+        
+		pw.close();
+        System.out.println("Done!");
     }
     
-	public void parse(String file, String year) {
+	public ArrayList<Class> parse(String file, String year) {
 		//HashMap<String, ArrayList<Class>> professors = new HashMap<>(); 
 		ArrayList<Class> classes = new ArrayList<Class>();
 		
@@ -62,14 +116,15 @@ public class Parser {
 	            		//e.printStackTrace();
 	            }
 	        }
-	    		for (Class cl : classes) {
-	    			//System.out.println(cl.title);
-	    			System.out.println(cl.toString());
-	    			System.out.println("");
-	    		}
+//	    		for (Class cl : classes) {
+//	    			//System.out.println(cl.title);
+//	    			System.out.println(cl.toString());
+//	    			System.out.println("");
+//	    		}
 	    } catch (IOException e) {
 	    		//e.printStackTrace();
 	    }
+	    return classes;
 	}
 	
     public ArrayList<String> parseLine(String line) {

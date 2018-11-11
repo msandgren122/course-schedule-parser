@@ -20,6 +20,35 @@ public class Class {
 		this.year = year;
 	}
 	
+	public String getTitle() {
+		return title.replace(",", "");
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public String getCredits() {
+		return creditAmount;
+	}
+	
+	public String getCapacity() {
+		return capacity;
+	}
+	
+	public String getActual() {
+		return actual;
+	}
+	
+	public String getInstructor() {
+		//return instructor.split(",")[0];
+		return instructor.replace(",", "");
+	}
+	
+	public String getYear() {
+		return year;
+	}
+	
 	public String toString() {
 		String str = "Title: " + title.toUpperCase() + "\n";
 		str += "Status: " + status + "\n";
