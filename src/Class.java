@@ -41,7 +41,6 @@ public class Class {
 	}
 	
 	public String getInstructor() {
-		//return instructor.split(",")[0];
 		return instructor.replace(",", "");
 	}
 	

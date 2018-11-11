@@ -10,9 +10,7 @@ import java.io.PrintWriter;
 public class Parser {
 	static HashMap<String, String> csvFiles = new HashMap<String, String>();
 	
-	// Parse each csv file and create professor classes, outputting the result to a text file
 	public static void main(String[] args) throws FileNotFoundException {
-		
 		csvFiles.put("sp19", "19SP");
 		csvFiles.put("fa18", "18FA");
 		csvFiles.put("sp18", "18SP");
@@ -77,7 +75,6 @@ public class Parser {
     }
     
 	public ArrayList<Class> parse(String file, String year) {
-		//HashMap<String, ArrayList<Class>> professors = new HashMap<>(); 
 		ArrayList<Class> classes = new ArrayList<Class>();
 		
 		String workingDir = "/Users/zacharysnoek/Programming/java/course-schedule-parser/csv/";
@@ -91,8 +88,8 @@ public class Parser {
 	            ArrayList<String> line = parseLine(l);
 	            
 	            try {
-	            		String comp = line.get(0).trim();
-	        	   		if (comp.equals("IN PROGRESS") || comp.equals("CANCELLED") || comp.equals("CLOSED") || comp.equals("COMPLETED") || comp.equals("PERMISSION")) {
+	            		String stat = line.get(0).trim();
+	        	   		if (stat.equals("IN PROGRESS") || stat.equals("CANCELLED") || stat.equals("CLOSED") || stat.equals("COMPLETED") || stat.equals("PERMISSION")) {
 	        	   			
 	        	   			String title = line.get(1);
 	        	   			String status = line.get(0);
@@ -103,24 +100,12 @@ public class Parser {
 	        	   			
 	        	   			Class c = new Class(title, status, creditAmount, capacity, actual, instructor, year);
 	        	   			
-//	        	   			if (professors.containsKey(title)) {
-//	        	   				professors.get(title).add(c);
-//	        	   			} else {
-//	        	   				//ArrayList<Class> classes = new ArrayList<Class>();
-//	        	   				classes.add(c);
-//	        	   				professors.put(title, classes);
-//	        	   			}
 	        	   			classes.add(c);
 	        	   		}
 	            } catch (IndexOutOfBoundsException e) {
 	            		//e.printStackTrace();
 	            }
 	        }
-//	    		for (Class cl : classes) {
-//	    			//System.out.println(cl.title);
-//	    			System.out.println(cl.toString());
-//	    			System.out.println("");
-//	    		}
 	    } catch (IOException e) {
 	    		//e.printStackTrace();
 	    }
@@ -146,7 +131,6 @@ public class Parser {
 					}
 				} 
 				else if (c == ',') {
-					// Add to array
 					output.add(sb.toString());
 					sb = new StringBuilder();
 				} else {
