@@ -115,6 +115,16 @@ View(agg)
 
 
 
+# filter to who is interesting
+keeps <- c("Coyle Brian R.", 
+           "Roberts Nathaniel J.",
+           "Briggs John A.", 
+           "Beaulieu Genevieve L.")
+
+fired <- 
+  agg %>% 
+  filter(., Instructor %in% keeps)
+View(fired)
 
 
 
@@ -124,6 +134,19 @@ southard
 
 ggplot(southard, aes(x = Year, y = nstudents, group = Title)) +
   geom_line(aes(color = Title))
-  
 
+
+
+#function to plot that for a particular prof
+# get profs with sort(unique(main$Instructor))
+profplot <- function(prof) {
+  p <- filter(agg, Instructor == prof)
+  ggplot(p, aes(x = Year, y = nstudents, group = Title)) +
+    geom_line(aes(color = Title))
+}
+
+#usage
+profplot("Coyle Brian R.")
+
+  
 
